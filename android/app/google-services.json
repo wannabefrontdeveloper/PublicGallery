@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "468252476924",
+    "project_id": "public-gallery-850ab",
+    "storage_bucket": "public-gallery-850ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:468252476924:android:9d59a89c5ff51068f69e79",
+        "android_client_info": {
+          "package_name": "com.publicgallerygiwonk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMujUkC0ZMmvqZYvei4Al0MkqndoM1RGc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
