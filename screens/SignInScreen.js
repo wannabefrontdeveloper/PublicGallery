@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import BorderedInput from '../components/BorderedInput';
-import CustomButton from '../components/CustomButtons';
+import CustomButton from '../components/CustomButton';
 
 function SignInScreen() {
   return (

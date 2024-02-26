@@ -7,7 +7,7 @@ function CustomButton({onPress, title, hasMarginBottom}) {
       style={[styles.block, styles.overflow, hasMarginBottom && styles.margin]}>
       <Pressable
         onPress={onPress}
-        styles={({pressed}) => [
+        style={({pressed}) => [
           styles.wrapper,
           Platform.OS === 'ios' && pressed && {opacity: 0.5},
         ]}
