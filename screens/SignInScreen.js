@@ -27,7 +27,7 @@ function SignInScreen({navigation, route}) {
   };
   return (
     <KeyboardAvoidingView
-      style={styles.KeyboardAvoidingView}
+      style={styles.keyboardAvoidingView}
       behavior={Platform.select({ios: 'padding'})}>
       <SafeAreaView style={styles.fullscreen}>
         <Text style={styles.text}>PublicGallery</Text>
