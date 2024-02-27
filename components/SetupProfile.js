@@ -1,6 +1,13 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {Image, Pressable, StyleSheet, View, Platform} from 'react-native';
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  View,
+  Platform,
+  ActivityIndicator,
+} from 'react-native';
 import {signOut} from '../lib/auth';
 import {createUser} from '../lib/users';
 import BorderedInput from './BorderedInput';
@@ -89,10 +96,14 @@ function SetupProfile() {
           onSubmitEditing={onSubmit}
           returnKeyType="next"
         />
-        <View style={styles.buttons}>
-          <CustomButton title="다음" onPress={onSubmit} hasMarginbutton />
-          <CustomButton title="취소" onPress={onCancel} theme="secondary" />
-        </View>
+        {loading ? (
+          <ActivityIndicator size={32} color="#6200ee" style={styles.spinner} />
+        ) : (
+          <View style={styles.buttons}>
+            <CustomButton title="다음" onPress={onSubmit} hasMarginbutton />
+            <CustomButton title="취소" onPress={onCancel} theme="secondary" />
+          </View>
+        )}
       </View>
     </View>
   );
