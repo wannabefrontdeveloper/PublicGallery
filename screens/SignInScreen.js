@@ -1,3 +1,4 @@
+import {getUser} from '../lib/users';
 import React, {useState} from 'react';
 import {
   Alert,
@@ -36,11 +37,17 @@ function SignInScreen({navigation, route}) {
       return;
     }
 
-    const info = {email, password};
     setLoading(true);
+    const info = {email, password};
+
     try {
       const {user} = isSignUp ? await signUp(info) : await signIn(info);
-      console.log(user);
+      const profile = await getUser(user.uid);
+      if (!profile) {
+        navigation.navigate('Welcome', {uid: user.uid});
+      } else {
+        // 구현 예정
+      }
     } catch (e) {
       const messages = {
         'auth/email-already-in-use': '이미 가입된 이메일입니다.',
