@@ -1,6 +1,6 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {Pressable, StyleSheet, View, Platform} from 'react-native';
+import {Image, Pressable, StyleSheet, View, Platform} from 'react-native';
 import {signOut} from '../lib/auth';
 import {createUser} from '../lib/users';
 import BorderedInput from './BorderedInput';
@@ -12,6 +12,7 @@ function SetupProfile() {
   const [displayName, setDisplayName] = useState('');
   const navigation = useNavigation();
   const {setUser} = useUserContext();
+  const [response, setResponse] = useState(null);
 
   const {params} = useRoute();
   const {uid} = params || {};
@@ -39,14 +40,20 @@ function SetupProfile() {
         includeBase64: Platform.OS === 'android',
       },
       res => {
-        console.log(res);
+        if (res.didCancel) {
+          // 취소했을 경우
+          return;
+        }
+        setResponse(res);
       },
     );
   };
 
   return (
     <View style={styles.block}>
-      <Pressable style={styles.circle} onPress={onSelectImage} />
+      <Pressable onPress={onSelectImage}>
+        <Image style={styles.circle} source={{uri: response?.assets[0]?.uri}} />
+      </Pressable>
       <View style={styles.form}>
         <BorderedInput
           placeholder="닉네임"
