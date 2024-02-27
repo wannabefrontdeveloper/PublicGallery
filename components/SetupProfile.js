@@ -47,7 +47,6 @@ function SetupProfile() {
   return (
     <View style={styles.block}>
       <Pressable style={styles.circle} onPress={onSelectImage} />
-      <View style={styles.circle} />
       <View style={styles.form}>
         <BorderedInput
           placeholder="닉네임"
