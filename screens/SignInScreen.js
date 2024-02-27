@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -25,6 +25,10 @@ function SignInScreen({navigation, route}) {
     Keyboard.dismiss();
     console.log(form);
   };
+
+  const passwordRef = useRef();
+  const confirmPasswordRef = useRef();
+
   return (
     <KeyboardAvoidingView
       style={styles.keyboardAvoidingView}
@@ -41,12 +45,23 @@ function SignInScreen({navigation, route}) {
             autoCorrect={false}
             autoCompleteType="email"
             keyboardType="email-address"
+            returnKeyType="next"
+            onSubmitEditing={() => passwordRef.current.focus()}
           />
           <BorderedInput
             placeholder="비밀번호"
             hasMarginBottom={isSignUp}
             value={form.password}
             onChangeText={createChangeTextHandler('password')}
+            ref={passwordRef}
+            returnKeyType={isSignUp ? 'next' : 'done'}
+            onSubmitEditing={() => {
+              if (isSignUp) {
+                confirmPasswordRef.current.focus();
+              } else {
+                onSubmit();
+              }
+            }}
             autoCapitalize="none"
             secureTextEntry
           />
@@ -55,6 +70,9 @@ function SignInScreen({navigation, route}) {
               placeholder="비밀번호 확인"
               value={form.confirmPassword}
               onChangeText={createChangeTextHandler('confirmPassword')}
+              ref={confirmPasswordRef}
+              returnKeyType="done"
+              onSubmitEditing={onSubmit}
               autoCapitalize="none"
               secureTextEntry
             />
