@@ -1,11 +1,12 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Pressable, StyleSheet, View, Platform} from 'react-native';
 import {signOut} from '../lib/auth';
 import {createUser} from '../lib/users';
 import BorderedInput from './BorderedInput';
 import CustomButton from './CustomButton';
 import {useUserContext} from '../contexts/UserContext';
+import {launchImageLibrary} from 'react-native-image-picker';
 
 function SetupProfile() {
   const [displayName, setDisplayName] = useState('');
@@ -29,8 +30,23 @@ function SetupProfile() {
     navigation.goBack();
   };
 
+  const onSelectImage = () => {
+    launchImageLibrary(
+      {
+        mediaType: 'photo',
+        maxWidth: 512,
+        maxHeight: 512,
+        includeBase64: Platform.OS === 'android',
+      },
+      res => {
+        console.log(res);
+      },
+    );
+  };
+
   return (
     <View style={styles.block}>
+      <Pressable style={styles.circle} onPress={onSelectImage} />
       <View style={styles.circle} />
       <View style={styles.form}>
         <BorderedInput
