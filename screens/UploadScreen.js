@@ -6,9 +6,14 @@ import {
   Animated,
   Keyboard,
   useWindowDimensions,
+  Platform,
 } from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import IconRightButton from '../components/IconRightButton';
+import storage from '@react-native-firebase/storage';
+import {useUserContext} from '../contexts/UserContext';
+import {v4} from 'uuid';
+import {createPost} from '../lib/posts';
 
 function UploadScreen() {
   const route = useRoute();
@@ -17,9 +22,24 @@ function UploadScreen() {
   const [description, setDescription] = useState('');
   const animation = useRef(new Animated.Value(width)).current;
   const navigation = useNavigation();
-  const onSubmit = useCallback(() => {
-    // Todo: 포스트 작성 로직 구현
-  }, []);
+  const {user} = useUserContext();
+  const onSubmit = useCallback(async () => {
+    navigation.pop();
+    const asset = res.assets[0];
+
+    const extension = asset.fileName.split('.').pop();
+    const reference = storage().ref(`/photo/${user.id}/${v4()}.${extension}`);
+    if (Platform.OS === 'android') {
+      await reference.putString(asset.base64, 'base64', {
+        contentType: asset.type,
+      });
+    } else {
+      await reference.putFile(asset.uri);
+    }
+    const photoURL = await reference.getDownloadURL();
+    await createPost({description, photoURL, user});
+    // TODO: 포스트 목록 새로고침
+  }, [res, user, description, navigation]);
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
   useEffect(() => {
