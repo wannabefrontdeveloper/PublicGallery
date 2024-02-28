@@ -6,7 +6,6 @@ import {
   View,
   Animated,
   Keyboard,
-  Image,
   useWindowDimensions,
 } from 'react-native';
 
@@ -43,7 +42,7 @@ function UploadScreen() {
 
   return (
     <View style={styles.block}>
-      <Image
+      <Animated.Image
         source={{uri: res.assets[0]?.uri}}
         style={[styles.image, {height: animation}]}
         resizeMode="cover"
