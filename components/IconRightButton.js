@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Pressable, Platform} from 'react-native';
-import Icon from 'react-native-vector-icons/Icon';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 function IconRightButton({name, color, onPress}) {
   return (
