@@ -9,8 +9,16 @@ import {
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import UploadModeModal from './UploadModeModal';
+import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 
 const TABBAR_HEIGHT = 49;
+
+const imagePickerOption = {
+  mediaType: 'photo',
+  maxWidth: 768,
+  maxHeight: 768,
+  includeBase64: Platform.OS === 'android',
+};
 
 function CameraButton() {
   const insets = useSafeAreaInsets();
@@ -20,6 +28,21 @@ function CameraButton() {
     android: TABBAR_HEIGHT / 2,
     ios: TABBAR_HEIGHT / 2 + insets.bottom - 4,
   });
+
+  const onPickImage = res => {
+    if (res.didCancel || !res) {
+      return;
+    }
+    console.log(res);
+  };
+
+  const onLaunchCamera = () => {
+    launchCamera(imagePickerOption, onPickImage);
+  };
+
+  const onLaunchImageLibrary = () => {
+    launchImageLibrary(imagePickerOption, onPickImage);
+  };
 
   const onPress = () => {
     if (Platform.OS === 'android') {
@@ -34,9 +57,9 @@ function CameraButton() {
       },
       buttonIndex => {
         if (buttonIndex === 0) {
-          console.log('카메라 촬영');
+          onLaunchCamera();
         } else if (buttonIndex === 1) {
-          console.log('사진 선택');
+          onLaunchImageLibrary();
         }
       },
     );
@@ -57,6 +80,8 @@ function CameraButton() {
       <UploadModeModal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
+        onLaunchCamera={onLaunchCamera}
+        onLaunchImageLibrary={onLaunchImageLibrary}
       />
     </>
   );
