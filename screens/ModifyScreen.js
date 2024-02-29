@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import IconRightButton from '../components/IconRightButton';
+import {updatePost} from '../lib/posts';
 
 function ModifyScreen() {
   const navigation = useNavigation();
@@ -14,11 +15,14 @@ function ModifyScreen() {
   // 라우트 파라미터의 description을 초깃값으로 사용
   const [description, setDescription] = useState(params.description);
 
-  const onSubmit = useCallback(() => {
-    // TODO: 포스트 수정
+  const onSubmit = useCallback(async () => {
+    await updatePost({
+      id: params.id,
+      description,
+    });
     // TODO: 포스트 및 포스트 목록 업데이트
     navigation.pop();
-  }, [navigation]);
+  }, [navigation, params.id, description]);
 
   useEffect(() => {
     navigation.setOptions({
