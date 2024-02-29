@@ -40,7 +40,7 @@ function PostCard({user, photoURL, description, createdAt, id}) {
             <Text style={styles.displayName}>{user.displayName}</Text>
           </Pressable>
           {isMyPost && (
-            <Pressable hitSlop={8}>
+            <Pressable hitSlop={8} onPress={onPressMore}>
               <Icon name="more-vert" size={20} />
             </Pressable>
           )}
