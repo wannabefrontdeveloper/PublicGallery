@@ -52,11 +52,6 @@ const styles = StyleSheet.create({
     paddingBottom: 64,
     alignItems: 'center',
   },
-  avatar: {
-    width: 128,
-    height: 128,
-    borderRadius: 64,
-  },
   username: {
     marginTop: 8,
     fontSize: 24,
