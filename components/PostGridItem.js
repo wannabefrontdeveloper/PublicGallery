@@ -1,11 +1,14 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {StyleSheet, useWindowDimensions, Image, Pressable} from 'react-native';
 
 function PostGridItem({post}) {
   const dimensions = useWindowDimensions();
   const size = (dimensions.width - 3) / 3;
+  const navigation = useNavigation();
+
   const onPress = () => {
-    // TODO: 단일 포스트 조회 화면 띄우기
+    navigation.navigate('Post', {post});
   };
 
   return (
