@@ -29,7 +29,7 @@ function ModifyScreen() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.select({ios: 'height'})}
-      style={StyleSheet.block}
+      style={styles.block}
       keyboardVerticalOffset={Platform.select({
         ios: 88,
       })}>
