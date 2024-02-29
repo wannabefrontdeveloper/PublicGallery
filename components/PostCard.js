@@ -29,7 +29,10 @@ function PostCard({user, photoURL, description, createdAt, id}) {
     }
   };
 
-  const {isSelecting, onPressMore, onClose, actions} = usePostActions();
+  const {isSelecting, onPressMore, onClose, actions} = usePostActions({
+    id,
+    description,
+  });
 
   return (
     <>
