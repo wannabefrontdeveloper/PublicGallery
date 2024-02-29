@@ -15,7 +15,7 @@ function ActionSheetModal({visible, onClose, actions}) {
             <Pressable
               style={styles.actionButton}
               android_ripple={{color: '#eee'}}
-              onPreess={() => {
+              onPress={() => {
                 action.onPress();
                 onClose();
               }}
