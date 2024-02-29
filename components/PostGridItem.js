@@ -3,7 +3,7 @@ import {StyleSheet, useWindowDimensions, Image, Pressable} from 'react-native';
 
 function PostGridItem({post}) {
   const dimensions = useWindowDimensions();
-  const size = dimensions.width / 3;
+  const size = (dimensions.width - 3) / 3;
   const onPress = () => {
     // TODO: 단일 포스트 조회 화면 띄우기
   };
@@ -30,7 +30,7 @@ function PostGridItem({post}) {
 }
 
 const styles = StyleSheet.create({
-  block: {},
+  block: {margin: 0.5},
   image: {
     backgroundColor: '#bdbdbd',
     width: '100%',
