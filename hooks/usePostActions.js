@@ -1,14 +1,26 @@
 import {useState} from 'react';
 import {ActionSheetIOS, Platform} from 'react-native';
+import {removePost} from '../lib/posts';
+import {useNavigation, useRoute} from '@react-navigation/native';
 
-export default function usePostActions() {
+export default function usePostActions({id, description}) {
   const [isSelecting, setIsSelecting] = useState(false);
+
+  const navigation = useNavigation();
+  const route = useRoute();
 
   const edit = () => {
     console.log('TODO: edit');
   };
-  const remove = () => {
-    console.log('TODO: remove');
+  const remove = async () => {
+    await removePost(id);
+
+    // 현재 단일 포스트 조회 화면이라면 뒤로가기
+    if (route.name === 'Post') {
+      navigation.pop();
+    }
+
+    // TODO: 홈 및 프로필 화면의 목록 업데이트
   };
   const onPressMore = () => {
     if (Platform.OS === 'android') {
