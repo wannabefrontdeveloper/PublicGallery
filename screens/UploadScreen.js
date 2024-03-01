@@ -15,6 +15,7 @@ import storage from '@react-native-firebase/storage';
 import {useUserContext} from '../contexts/UserContext';
 import {v4} from 'uuid';
 import {createPost} from '../lib/posts';
+import events from '../lib/event';
 
 function UploadScreen() {
   const route = useRoute();
@@ -39,6 +40,7 @@ function UploadScreen() {
     }
     const photoURL = await reference.getDownloadURL();
     await createPost({description, photoURL, user});
+    events.emit('refresh');
     // TODO: 포스트 목록 새로고침
   }, [res, user, description, navigation]);
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
