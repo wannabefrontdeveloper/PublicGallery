@@ -17,7 +17,7 @@ import events from '../lib/events';
 
 function Profile({userId}) {
   const [user, setUser] = useState(null);
-  const {posts, noMorePost, refreshing, onLoadMore, onRefresh} =
+  const {posts, noMorePost, refreshing, onLoadMore, onRefresh, removePost} =
     usePosts(userId);
 
   const {user: me} = useUserContext();
@@ -33,10 +33,12 @@ function Profile({userId}) {
       return;
     }
     events.addListener('refresh', onRefresh);
+    events.addListener('removePost', removePost);
     return () => {
       events.removeListener('refresh', onRefresh);
+      events.addListener('removePost', removePost);
     };
-  }, [isMyProfile, onRefresh]);
+  }, [removePost, isMyProfile, onRefresh]);
 
   if (!user || !posts) {
     return (
