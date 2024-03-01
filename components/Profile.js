@@ -13,7 +13,7 @@ import Avatar from './Avatar';
 import PostGridItem from './PostGridItem';
 import usePosts from '../hooks/usePosts';
 import {useUserContext} from '../contexts/UserContext';
-import events from '../lib/event';
+import events from '../lib/events';
 
 function Profile({userId}) {
   const [user, setUser] = useState(null);

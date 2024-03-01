@@ -15,7 +15,7 @@ import storage from '@react-native-firebase/storage';
 import {useUserContext} from '../contexts/UserContext';
 import {v4} from 'uuid';
 import {createPost} from '../lib/posts';
-import events from '../lib/event';
+import events from '../lib/events';
 
 function UploadScreen() {
   const route = useRoute();

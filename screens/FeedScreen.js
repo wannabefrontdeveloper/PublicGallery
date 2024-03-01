@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import usePosts from '../hooks/usePosts';
-import events from '../lib/event';
+import events from '../lib/events';
 
 import {
   ActivityIndicator,
