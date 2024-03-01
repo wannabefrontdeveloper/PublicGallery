@@ -51,10 +51,27 @@ export default function usePosts(userId) {
     [posts],
   );
 
+  const updatePost = useCallback(
+    ({postId, description}) => {
+      // id가 일치하는 포스트를 찾아서 description 변경
+      const nextPosts = posts.map(post =>
+        post.id === postId
+          ? {
+              ...post,
+              description,
+            }
+          : post,
+      );
+      setPosts(nextPosts);
+    },
+    [posts],
+  );
+
   usePostsEventEffect({
     refresh: onRefresh,
     removePost,
     enabled: !userId || userId === user.id,
+    updatePost,
   });
 
   return {
