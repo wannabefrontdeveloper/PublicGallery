@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import usePosts from '../hooks/usePosts';
+import events from '../lib/event';
 
 import {
   ActivityIndicator,
@@ -11,6 +12,13 @@ import PostCard from '../components/PostCard';
 
 function FeedScreen() {
   const {posts, noMorePost, refreshing, onLoadMore, onRefresh} = usePosts();
+
+  useEffect(() => {
+    events.addListener('refresh', onRefresh);
+    return () => {
+      events.removeListener('refresh', onRefresh);
+    };
+  }, [onRefresh]);
   return (
     <FlatList
       data={posts}
